@@ -45,7 +45,7 @@ public class Client {
     private Status status;
 
     public enum Status {
-        ACTIVE,
-        INACTIVE
+        ATIVO,
+        INATIVO
     }
 }
