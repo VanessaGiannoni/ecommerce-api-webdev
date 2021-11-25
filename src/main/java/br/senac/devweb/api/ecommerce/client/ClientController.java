@@ -89,7 +89,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ClientRepresentation.CreateOrUpdateClient> deleteClient(
+    public ResponseEntity<ClientRepresentation.ClientDetail> deleteClient(
         @PathVariable("id") Long id
     ) {
         this.clientService.deleteClient(id);
