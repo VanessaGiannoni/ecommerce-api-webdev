@@ -1,5 +1,6 @@
 package br.senac.devweb.api.ecommerce.address;
 
+import br.senac.devweb.api.ecommerce.client.ClientRepresentation;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -7,12 +8,14 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public interface AddressRepresentation {
     @Data
     @Getter
     @Setter
-    class CreateAddressRep {
+    class CreateOrUpdateAddress {
         @NotNull(message = "O campo cliente não pode ser nulo!")
         private Long client;
 
@@ -49,6 +52,63 @@ public interface AddressRepresentation {
     @Builder
     class AddressDetail {
         private ClientRepresentation.ClientDetail client;
+        private Address.Type type;
+        private String state;
+        private String city;
+        private String cep;
+        private String street;
+        private String number;
+        private String complement;
 
+        public static AddressDetail from(Address address) {
+            return AddressDetail.builder()
+                    .client(ClientRepresentation.ClientDetail.from(address.getClient()))
+                    .type(address.getType())
+                    .state(address.getState())
+                    .city(address.getCity())
+                    .cep(address.getCep())
+                    .street(address.getStreet())
+                    .number(address.getNumber())
+                    .complement(address.getComplement())
+                    .build();
+        }
+    }
+
+    @Data
+    @Getter
+    @Setter
+    @Builder
+    class AddressList {
+        private ClientRepresentation.ClientDetail client;
+        private Address.Type type;
+        private String state;
+        private String city;
+        private String cep;
+        private String street;
+        private String number;
+        private String complement;
+
+        public static AddressRepresentation.AddressList from(Address address) {
+            return AddressList
+                    .builder()
+                    .client(ClientRepresentation.ClientDetail.from(address.getClient()))
+                    .type(address.getType())
+                    .state(address.getState())
+                    .city(address.getCity())
+                    .cep(address.getCep())
+                    .street(address.getStreet())
+                    .number(address.getNumber())
+                    .complement(address.getComplement())
+                    .build();
+        }
+
+        public static List<AddressList> from(List<Address> addressList) {
+            return addressList
+                    .stream()
+                    .map(AddressRepresentation.AddressList::from)
+                    .collect(Collectors.toList());
+        }
     }
 }
+
+

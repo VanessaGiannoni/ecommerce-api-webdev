@@ -6,12 +6,15 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface AddressRepository extends PagingAndSortingRepository<Address, Long>,
         QuerydslPredicateExecutor<Address>,
         QuerydslBinderCustomizer<QAddress> {
+
     List<Address> findAll(Predicate filter);
 
     default void customize(QuerydslBindings bindings, QAddress address) {
