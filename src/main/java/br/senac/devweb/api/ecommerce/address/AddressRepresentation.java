@@ -51,7 +51,8 @@ public interface AddressRepresentation {
     @Setter
     @Builder
     class AddressDetail {
-        private ClientRepresentation.ClientDetail client;
+        private Long id;
+        private Long clientId;
         private Address.Type type;
         private String state;
         private String city;
@@ -62,7 +63,8 @@ public interface AddressRepresentation {
 
         public static AddressDetail from(Address address) {
             return AddressDetail.builder()
-                    .client(ClientRepresentation.ClientDetail.from(address.getClient()))
+                    .id(address.getId())
+                    .clientId(address.getClient().getId())
                     .type(address.getType())
                     .state(address.getState())
                     .city(address.getCity())
@@ -79,7 +81,8 @@ public interface AddressRepresentation {
     @Setter
     @Builder
     class AddressList {
-        private ClientRepresentation.ClientDetail client;
+        private Long id;
+        private Long clientId;
         private Address.Type type;
         private String state;
         private String city;
@@ -91,7 +94,8 @@ public interface AddressRepresentation {
         public static AddressRepresentation.AddressList from(Address address) {
             return AddressList
                     .builder()
-                    .client(ClientRepresentation.ClientDetail.from(address.getClient()))
+                    .id(address.getId())
+                    .clientId(address.getClient().getId())
                     .type(address.getType())
                     .state(address.getState())
                     .city(address.getCity())

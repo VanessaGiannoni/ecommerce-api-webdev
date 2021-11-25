@@ -50,7 +50,7 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClientRepresentation.ClientDetail> getClienById(
+    public ResponseEntity<ClientRepresentation.ClientDetail> getClientById(
             @PathVariable("id") Long id
     ) {
         return ResponseEntity.status(HttpStatus.OK).body(
